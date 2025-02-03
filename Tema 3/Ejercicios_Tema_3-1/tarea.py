@@ -7,10 +7,10 @@
 # de ambas.
 
 print("\n--- Ejercicio 1 ---")
-nombre_completo = "rafael perez garcia"
+nombre_completo = "rafael Ponce Vivancos"
 print(nombre_completo.title())  # Capitaliza cada palabra
 
-año_nacimiento = 2000
+año_nacimiento = 2006
 edad = 2024 - año_nacimiento
 print(f"Mi edad es {edad} años")
 
