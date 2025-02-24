@@ -1,3 +1,2 @@
-import random
-
-clave_secreta = random.randint(1, 100)
+g = ["londres", "paris", "tokyo"]
+print(g)
