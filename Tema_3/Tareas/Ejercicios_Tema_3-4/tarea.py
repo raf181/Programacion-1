@@ -28,8 +28,8 @@ mi_diccionario = {
     "numeros": [1, 2, 3, 4, 5],
     "precio": 19.99,
     "coordenadas": (10, 20, 30),
-    "nombre": "Juan",
-    "ciudad": "Madrid"
+    "nombre": "Pepe",
+    "ciudad": "Cadiz"
 }
 
 # 2. ...
@@ -65,7 +65,7 @@ print(f"\n{NORMAL_COLOR}Último valor de la tupla:{RESET_COLOR}", mi_diccionario
 
 # 7. ...
 print(f"\n{NORMAL_COLOR}Diccionario con diccionario anidado:{RESET_COLOR}")
-# Esto lo hice para el 10, por eso tiene tambien para manejar el caso de que el valor de una clave sea un diccionario
+# Esto lo hice para el 10 (No era necesario), por eso tiene tambien para manejar el caso de que el valor de una clave sea un diccionario
 for clave, valor in mi_diccionario.items():
     if isinstance(valor, (dict, list, tuple)):
         # la variable clave se imprime entre comillas simples para que sea mas claro que es una clave, por comodidad pero se que no es necesario
@@ -96,37 +96,25 @@ print(f"{NORMAL_COLOR}CLAVE:{RESET_COLOR} 'edad' → {mi_diccionario['edad']}")
 # 9. ...
 diccionario_copia = mi_diccionario.copy()
 # mi_diccionario = None # Liberar variable
-diccionario_copia["nombre"] = "Ana"
+diccionario_copia["nombre"] = "Paco"
 diccionario_copia["ciudad"] = "Barcelona"
 
-# Imprimir diccionarios Debug
-print(f"\n{NORMAL_COLOR} Diccionario original {RESET_COLOR} → {mi_diccionario}")
-print(f"{NORMAL_COLOR} Diccionario copia {RESET_COLOR} → {diccionario_copia}")
+print(f"\n{NORMAL_COLOR}Diccionario original {RESET_COLOR} → {mi_diccionario}") # 
+print(f"{NORMAL_COLOR}Diccionario copia {RESET_COLOR} → {diccionario_copia}")
 
 # 10. ...
 diccionario_copia["datos_extra"] = {
     "telefono": "123456789",
-    "email": "ejemplo@mail.com"
+    "email": "ejemplo@dominio.com"
 }
 
 print(f"\n{NORMAL_COLOR}Diccionario con diccionario anidado:{RESET_COLOR}")
+# Solo mostrar el diccionario anidado
 for clave, valor in diccionario_copia.items():
-    if isinstance(valor, (dict, list, tuple)):
-        # la variable clave se imprime entre comillas simples para que sea mas claro que es una clave, por comodidad pero se que no es necesario
+    # Is instance para manejar el caso de que el valor de una clave sea un diccionario
+    if isinstance(valor, dict):
         print(f"{NORMAL_COLOR}CLAVE:{RESET_COLOR} '{clave}':")
-        # Si es un diccionario, lista o tupla, recorrer sus elementos y imprimirlos con un formato decente
-        if isinstance(valor, dict): 
-            # Convertir el diccionario a una lista de tuplas para recorrerlo
-            items = list(valor.items())
-            for i, (subclave, subvalor) in enumerate(items):
-                # "└─" si es el último elemento, "├─" si no; "Idea" de ChatGPT
-                branch = "└─" if i == len(items) - 1 else "├─"
-                print(f"{NORMAL_COLOR}  {branch} {RESET_COLOR}{subclave}: {subvalor}")
-        else:  # Para las listas y tuplas
-            for i, item in enumerate(valor):
-                # "└─" si es el último elemento, "├─" si no; "Idea" de ChatGPT
-                branch = "└─" if i == len(valor) - 1 else "├─"
-                print(f"{NORMAL_COLOR}  {branch} {RESET_COLOR}{item}")
-    else:
-        # Si no es un diccionario, lista o tupla, imprimir la clave y el valor de forma simple
-        print(f"{NORMAL_COLOR}CLAVE:{RESET_COLOR} '{clave}' → {valor}")
+        items = list(valor.items())
+        for i, (subclave, subvalor) in enumerate(items):
+            branch = "└─" if i == len(items) - 1 else "├─"
+            print(f"{NORMAL_COLOR}  {branch} {RESET_COLOR}{subclave}: {subvalor}")
