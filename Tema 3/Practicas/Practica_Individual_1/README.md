@@ -1,0 +1,28 @@
+# Go Bullet!
+
+A console-based western shootout game where you face 5 outlaws in deadly duels.
+
+## Game Rules
+
+- Face 5 outlaws, one per round
+- Each round has two dice rolls (player vs outlaw)
+- First roll:
+  - Higher sum wins and wounds the opponent
+- Second roll:
+  - Same rules as first roll
+  - If wounded player loses second roll, they die
+- Ties result in additional rounds
+- Player health resets each round
+
+## Scoring System
+
+- Round 1: 100 points (+50 if unharmed)
+- Round 2: 200 points
+- Round 3: 300 points (+100 if unharmed)
+- Round 4: 400 points
+- Round 5: 500 points (+250 if unharmed)
+
+## Requirements
+
+- Python 3.x
+- Required libraries: os, time, random

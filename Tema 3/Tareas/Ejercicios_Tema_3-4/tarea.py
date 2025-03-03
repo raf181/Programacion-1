@@ -95,13 +95,13 @@ print(f"{NORMAL_COLOR}CLAVE:{RESET_COLOR} 'edad' → {mi_diccionario['edad']}")
 
 # 9. ...
 diccionario_copia = mi_diccionario.copy()
-mi_diccionario = None # Liberar variable
+# mi_diccionario = None # Liberar variable
 diccionario_copia["nombre"] = "Ana"
 diccionario_copia["ciudad"] = "Barcelona"
 
 # Imprimir diccionarios Debug
-# print(f"\n{DEBUG_COLOR}Debug:{RESET_COLOR} Diccionario original → {mi_diccionario}")
-# print(f"{DEBUG_COLOR}Debug:{RESET_COLOR} Diccionario copia → {diccionario_copia}")
+print(f"\n{NORMAL_COLOR} Diccionario original {RESET_COLOR} → {mi_diccionario}")
+print(f"{NORMAL_COLOR} Diccionario copia {RESET_COLOR} → {diccionario_copia}")
 
 # 10. ...
 diccionario_copia["datos_extra"] = {
@@ -115,7 +115,7 @@ for clave, valor in diccionario_copia.items():
         # la variable clave se imprime entre comillas simples para que sea mas claro que es una clave, por comodidad pero se que no es necesario
         print(f"{NORMAL_COLOR}CLAVE:{RESET_COLOR} '{clave}':")
         # Si es un diccionario, lista o tupla, recorrer sus elementos y imprimirlos con un formato decente
-        if isinstance(valor, dict):
+        if isinstance(valor, dict): 
             # Convertir el diccionario a una lista de tuplas para recorrerlo
             items = list(valor.items())
             for i, (subclave, subvalor) in enumerate(items):
