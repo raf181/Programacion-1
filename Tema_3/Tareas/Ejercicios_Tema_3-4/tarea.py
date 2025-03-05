@@ -23,6 +23,32 @@ DEBUG_COLOR = '\033[38;5;208m'  # Orange
 NORMAL_COLOR = '\033[94m'       # Blue
 RESET_COLOR = '\033[0m'         # Reset to default
 
+# Funciones
+# Funcion para imprimir
+# Esto lo hice para el 10 (No era necesario), por eso tiene tambien para manejar el caso de que el valor de una clave sea un diccionario
+# Lopongo como funcion porque sirve para 7 y 9
+def print_bonito(select_diccionario):
+    for clave, valor in select_diccionario.items():
+        if isinstance(valor, (dict, list, tuple)):
+            # la variable clave se imprime entre comillas simples para que sea mas claro que es una clave, por comodidad pero se que no es necesario
+            print(f"{NORMAL_COLOR}CLAVE:{RESET_COLOR} '{clave}':")
+            # Si es un diccionario, lista o tupla, recorrer sus elementos y imprimirlos con un formato decente
+            if isinstance(valor, dict):
+                # Convertir el diccionario a una lista de tuplas para recorrerlo
+                items = list(valor.items())
+                for i, (subclave, subvalor) in enumerate(items):
+                    # "└─" si es el último elemento, "├─" si no; "Idea" de ChatGPT
+                    branch = "└─" if i == len(items) - 1 else "├─"
+                    print(f"{NORMAL_COLOR}  {branch} {RESET_COLOR}{subclave}: {subvalor}")
+            else:  # Para las listas y tuplas
+                for i, item in enumerate(valor):
+                    # "└─" si es el último elemento, "├─" si no; "Idea" de ChatGPT
+                    branch = "└─" if i == len(valor) - 1 else "├─"
+                    print(f"{NORMAL_COLOR}  {branch} {RESET_COLOR}{item}")
+        else:
+            # Si no es un diccionario, lista o tupla, imprimir la clave y el valor de forma simple
+            print(f"{NORMAL_COLOR}CLAVE:{RESET_COLOR} '{clave}' → {valor}")
+
 # 1. ...
 mi_diccionario = {
     "numeros": [1, 2, 3, 4, 5],
@@ -65,27 +91,7 @@ print(f"\n{NORMAL_COLOR}Último valor de la tupla:{RESET_COLOR}", mi_diccionario
 
 # 7. ...
 print(f"\n{NORMAL_COLOR}Diccionario con diccionario anidado:{RESET_COLOR}")
-# Esto lo hice para el 10 (No era necesario), por eso tiene tambien para manejar el caso de que el valor de una clave sea un diccionario
-for clave, valor in mi_diccionario.items():
-    if isinstance(valor, (dict, list, tuple)):
-        # la variable clave se imprime entre comillas simples para que sea mas claro que es una clave, por comodidad pero se que no es necesario
-        print(f"{NORMAL_COLOR}CLAVE:{RESET_COLOR} '{clave}':")
-        # Si es un diccionario, lista o tupla, recorrer sus elementos y imprimirlos con un formato decente
-        if isinstance(valor, dict):
-            # Convertir el diccionario a una lista de tuplas para recorrerlo
-            items = list(valor.items())
-            for i, (subclave, subvalor) in enumerate(items):
-                # "└─" si es el último elemento, "├─" si no; "Idea" de ChatGPT
-                branch = "└─" if i == len(items) - 1 else "├─"
-                print(f"{NORMAL_COLOR}  {branch} {RESET_COLOR}{subclave}: {subvalor}")
-        else:  # Para las listas y tuplas
-            for i, item in enumerate(valor):
-                # "└─" si es el último elemento, "├─" si no; "Idea" de ChatGPT
-                branch = "└─" if i == len(valor) - 1 else "├─"
-                print(f"{NORMAL_COLOR}  {branch} {RESET_COLOR}{item}")
-    else:
-        # Si no es un diccionario, lista o tupla, imprimir la clave y el valor de forma simple
-        print(f"{NORMAL_COLOR}CLAVE:{RESET_COLOR} '{clave}' → {valor}")
+print_bonito(mi_diccionario)
 
 # 8. ...
 del mi_diccionario["coordenadas"]
@@ -99,8 +105,11 @@ diccionario_copia = mi_diccionario.copy()
 diccionario_copia["nombre"] = "Paco"
 diccionario_copia["ciudad"] = "Barcelona"
 
-print(f"\n{NORMAL_COLOR}Diccionario original {RESET_COLOR} → {mi_diccionario}") # 
-print(f"{NORMAL_COLOR}Diccionario copia {RESET_COLOR} → {diccionario_copia}")
+print(f"\n{NORMAL_COLOR}Diccionario original{RESET_COLOR}:") # Print original
+print_bonito(diccionario_copia)
+
+print(f"{NORMAL_COLOR}Diccionario copia{RESET_COLOR}:") # Print copia
+print_bonito(diccionario_copia)
 
 # 10. ...
 diccionario_copia["datos_extra"] = {
