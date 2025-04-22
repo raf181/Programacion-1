@@ -1,1 +1,0 @@
-![Output de tarea.py](https://github.com/raf181/Programacion-1/blob/main/Tema%203/Ejercicios_Tema_3-1/output.txt)
