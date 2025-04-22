@@ -1,0 +1,28 @@
+modify these to fully continue to with the output in a good format that complies with these:
+#3. (2,5 puntos) Hacer un función que reciba el diccionario resultante del punto 2 y deberá hacer lo siguiente: 
+# - Para cada curso, mostrar que alumnos (nombre y apellidos) están a modo listado de clase.
+# - Para cada asignatura mostrar los alumnos que la tengan, a modo listado de clase.
+# - Mostrar cuántos alumnos hay por curso. 
+# - Mostrar para cuántos alumnos la suma de las cifras del DNI es impar y cuántos par. 
+the actual output is:
+Curso:'1':
+  ├─ {'Nombre': 'Alejandro', 'Apellidos': 'Gómez Fernández', 'DNI': '12345677Z', 'Asignaturas': ['Programación I', 'Programación II', 'Fundamentos de Redes', 'Gestión de Proyectos']}
+code:
+def print_bonito(select_diccionario):
+    for clave, valor in select_diccionario.items():
+        if isinstance(valor, (dict, list, tuple)):
+            print(f"Curso:'{clave}':")
+            if isinstance(valor, dict):
+                items = list(valor.items())
+                for i, (subclave, subvalor) in enumerate(items):
+                    branch = "└─" if i == len(items) - 1 else "├─"
+                    print(f"  {branch} {subclave}: {subvalor}")
+            else:
+                for i, item in enumerate(valor):
+                    branch = "└─" if i == len(valor) - 1 else "├─"
+                    print(f"  {branch} {item}")
+        else:
+            print(f"Curso:'{clave}' → {valor}")
+
+grupo_por_curso = GenerarAlumnos(alumnos, asignaturas)
+print_bonito(grupo_por_curso)

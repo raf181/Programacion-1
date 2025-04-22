@@ -1,0 +1,37 @@
+--- Ejercicio 1 ---
+Rafael Perez Garcia
+Mi edad es 24 años
+False
+La resta es: 4.50
+
+--- Ejercicio 2 ---
+3.14
+Hola Mundo
+[1, 2, 3, 4]
+(5, 6, 7, 8)
+
+--- Ejercicio 3 ---
+Resta: 5
+Suma: 15
+Multiplicación: 50
+Suma: 15
+Suma: 15
+Suma: 15
+Suma: 15
+Suma: 15
+Suma: 15
+Multiplicación: 50
+División: 2.0
+
+--- Ejercicio 4 ---
+Número 1: 8
+Número 2: 5
+Número 3: 18
+Número 4: 3.0
+Número 5: 0
+
+--- Ejercicio 5 ---
+Soy mayor o igual de 10
+Barcelona FC
+42
+Madrid
