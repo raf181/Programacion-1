@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Just Eleven - Ayuda{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Cómo Jugar</h2>
+    
+    <div class="rules">        <h3>Reglas del Just Eleven</h3>
+        <ol>
+            <li>El objetivo del juego es detener un temporizador lo más cerca posible al tiempo objetivo (por defecto 11 segundos).</li>
+            <li>Pueden jugar de 2 a 6 jugadores.</li>
+            <li>Cada jugador tiene 3 rondas para intentar acercarse al tiempo objetivo.</li>
+            <li>En cada turno, el jugador inicia un temporizador y debe detenerlo cuando crea que ha pasado el tiempo objetivo.</li>
+            <li>Si el jugador se pasa del tiempo objetivo, recibirá una puntuación penalizada, pero no 0.</li>
+            <li>Gana el jugador con mayor puntuación (los jugadores que se acercan más al objetivo sin pasarse tienen ventaja).</li>
+            <li>Se puede configurar un tiempo objetivo personalizado (mínimo 10 segundos).</li>
+        </ol>
+        
+        <h3>Opciones del Juego</h3>
+        <ul>
+            <li><strong>Jugar:</strong> Iniciar un nuevo juego.</li>
+            <li><strong>Ranking:</strong> Ver los 10 mejores jugadores.</li>
+            <li><strong>Ayuda:</strong> Ver las reglas del juego.</li>
+            <li><strong>Salir:</strong> Cerrar el juego.</li>
+        </ul>
+    </div>
+    
+    <div class="menu-options">
+        <a href="{{ url_for('index') }}" class="btn btn-secondary">Volver al Menú</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Just Eleven - Resultados{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>¡Juego Terminado!</h2>
+    
+    <div class="results">        <h3>Ganador: {{ winner }}</h3>
+        <p>Puntuación: {{ "%.2f"|format(winner_score) }} puntos</p>
+        
+        <h4>Puntuaciones finales:</h4>
+        <ul>
+            {% for i in range(game_state.players|length) %}
+            <li>
+                {{ game_state.players[i] }}: {{ "%.2f"|format(game_state.scores[i]) }} puntos
+                {% if game_state.original_times is defined and game_state.original_times[i] is defined %}
+                    (Tiempo: {{ "%.2f"|format(game_state.original_times[i]) }} segundos)
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+        
+        <p>Tiempo total: {{ "%.2f"|format(game_state.total_time) }} segundos</p>
+    </div>
+      <div class="menu-options">
+        <a href="{{ url_for('setup') }}" class="btn btn-primary">Jugar de nuevo</a>
+        <a href="{{ url_for('ranking') }}" class="btn btn-secondary">Ver Ranking</a>
+        <a href="{{ url_for('menu') }}" class="btn btn-info">Menú Post-Juego</a>
+    </div>
+</div>
+{% endblock %}

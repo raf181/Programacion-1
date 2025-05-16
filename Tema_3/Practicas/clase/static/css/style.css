@@ -1,0 +1,355 @@
+/* Estilos generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #f5f7fa;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    background: #3498db;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+footer {
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 40px;
+    color: #888;
+    font-size: 0.9em;
+}
+
+h1, h2, h3, h4 {
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+/* Botones */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    margin: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.btn-lg {
+    padding: 15px 30px;
+    font-size: 18px;
+}
+
+.btn-primary {
+    background: #3498db;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: #2980b9;
+}
+
+.btn-secondary {
+    background: #2ecc71;
+    color: #fff;
+}
+
+.btn-secondary:hover {
+    background: #27ae60;
+}
+
+.btn-info {
+    background: #f39c12;
+    color: #fff;
+}
+
+.btn-info:hover {
+    background: #e67e22;
+}
+
+.btn-success {
+    background: #27ae60;
+    color: #fff;
+}
+
+.btn-success {
+    background: #27ae60;
+    color: #fff;
+}
+
+.btn-success:hover {
+    background: #2ecc71;
+}
+
+.btn-danger {
+    background: #c0392b;
+    color: #fff;
+}
+
+.btn-danger:hover {
+    background: #e74c3c;
+}
+
+.play-form button {
+    min-width: 200px;
+    margin: 20px 0;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    border: none;
+    font-size: 1.2rem;
+    padding: 15px 30px;
+}
+
+/* Menú principal */
+.main-menu {
+    text-align: center;
+    margin: 30px 0;
+}
+
+.main-menu .btn {
+    margin: 10px;
+    min-width: 150px;
+}
+
+.main-menu.post-game {
+    background: #f5f5f5;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.game-info {
+    margin-top: 30px;
+    padding: 15px;
+    background: #e8f4fc;
+    border-radius: 10px;
+    text-align: center;
+}
+
+/* Formularios */
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Juego */
+.player-turn {
+    text-align: center;
+    padding: 15px;
+    background: #e8f4fc;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.game-board {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.dice-result {
+    background: #2ecc71;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    animation: pulse 1s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.timer-result {
+    background: #2ecc71;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    animation: pulse 1s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.timer-result.over-time {
+    background: #e74c3c;
+}
+
+.timer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+}
+
+#timer {
+    font-size: 4rem;
+    font-family: 'Courier New', Courier, monospace;
+    background: #2c3e50;
+    color: #ecf0f1;
+    padding: 15px 30px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    min-width: 250px;
+    text-align: center;
+    transition: all 0.3s ease;
+    letter-spacing: 2px;
+    border: 3px solid #34495e;
+}
+
+#timer.active {
+    animation: pulse-subtle 1s infinite alternate;
+    box-shadow: 0 0 20px rgba(52, 152, 219, 0.5);
+    border-color: #3498db;
+}
+
+@keyframes pulse-subtle {
+    from { transform: scale(1); }
+    to { transform: scale(1.02); }
+}
+
+.target-time {
+    font-size: 1.4rem;
+    color: #7f8c8d;
+    font-weight: bold;
+    margin-bottom: 20px;
+    padding: 5px 10px;
+    background: #ecf0f1;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.scores {
+    width: 100%;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.scores ul {
+    list-style-type: none;
+}
+
+.scores li {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.play-form {
+    margin: 20px 0;
+    text-align: center;
+}
+
+/* Resultados */
+.results {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.menu-options {
+    text-align: center;
+    margin-top: 30px;
+}
+
+/* Ranking */
+.ranking-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.ranking-table th,
+.ranking-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.ranking-table th {
+    background: #3498db;
+    color: #fff;
+}
+
+.ranking-table tbody tr:hover {
+    background: #f5f5f5;
+}
+
+/* Reglas */
+.rules {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.rules ol,
+.rules ul {
+    padding-left: 20px;
+    margin-bottom: 20px;
+}
+
+.rules li {
+    margin-bottom: 10px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+    
+    .btn {
+        display: block;
+        width: 100%;
+        margin: 10px 0;
+    }
+}

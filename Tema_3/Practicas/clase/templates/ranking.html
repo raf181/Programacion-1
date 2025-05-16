@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Just Eleven - Ranking{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Top 10 Mejores Jugadores</h2>
+    
+    {% if ranking %}
+    <table class="ranking-table">
+        <thead>            <tr>                <th>Posición</th>
+                <th>Jugador</th>
+                <th>Puntuación</th>
+                <th>Tiempo total</th>
+                <th>Fecha</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in ranking %}            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ entry.name }}</td>
+                <td>{{ "%.2f"|format(entry.score) }} puntos</td>
+                <td>{{ "%.2f"|format(entry.time) }} s</td>
+                <td>{{ entry.date }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>Aún no hay jugadores en el ranking.</p>
+    {% endif %}
+    
+    <div class="menu-options">
+        <a href="{{ url_for('index') }}" class="btn btn-secondary">Volver al Menú</a>
+    </div>
+</div>
+{% endblock %}

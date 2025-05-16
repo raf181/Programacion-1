@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %}Just Eleven - Configuración{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Configuración del Juego</h2>
+    
+    <form action="{{ url_for('setup') }}" method="post">        <div class="form-group">
+            <label for="num_players">Número de jugadores (2-6):</label>
+            <input type="number" id="num_players" name="num_players" min="2" max="6" value="2" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="target_time">Tiempo objetivo (mínimo 10 segundos):</label>
+            <input type="number" id="target_time" name="target_time" min="10" step="0.1" value="11" required>
+            <small class="form-help">El objetivo es detener el temporizador lo más cerca posible a este tiempo.</small>
+        </div>
+        
+        <div id="player-names-container">
+            <div class="form-group player-name">
+                <label for="player_1">Nombre del Jugador 1:</label>
+                <input type="text" id="player_1" name="player_1" required>
+            </div>
+            <div class="form-group player-name">
+                <label for="player_2">Nombre del Jugador 2:</label>
+                <input type="text" id="player_2" name="player_2" required>
+            </div>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Comenzar Juego</button>
+        <a href="{{ url_for('index') }}" class="btn btn-secondary">Volver</a>
+    </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.getElementById('num_players').addEventListener('change', function() {
+        const numPlayers = parseInt(this.value);
+        const container = document.getElementById('player-names-container');
+        
+        // Limpiar contenedor
+        container.innerHTML = '';
+        
+        // Agregar campos para cada jugador
+        for (let i = 1; i <= numPlayers; i++) {
+            const div = document.createElement('div');
+            div.className = 'form-group player-name';
+            
+            const label = document.createElement('label');
+            label.setAttribute('for', `player_${i}`);
+            label.textContent = `Nombre del Jugador ${i}:`;
+            
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.id = `player_${i}`;
+            input.name = `player_${i}`;
+            input.required = true;
+            
+            div.appendChild(label);
+            div.appendChild(input);
+            container.appendChild(div);
+        }
+    });
+</script>
+{% endblock %}

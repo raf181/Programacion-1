@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Just Eleven - Inicio{% endblock %}
+
+{% block content %}
+<div class="container">    <h2>Bienvenido a Just Eleven</h2>
+    <p>¿Puedes parar el reloj exactamente a los 11 segundos?</p>
+    
+    <div class="main-menu">
+        <a href="{{ url_for('setup') }}" class="btn btn-primary">Jugar</a>
+        <a href="{{ url_for('ranking') }}" class="btn btn-secondary">Ranking</a>
+        <a href="{{ url_for('help_page') }}" class="btn btn-info">Ayuda</a>
+        <a href="javascript:window.close();" class="btn btn-danger">Salir</a>
+    </div>
+</div>
+{% endblock %}

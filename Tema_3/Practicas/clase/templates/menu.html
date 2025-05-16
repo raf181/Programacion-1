@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Just Eleven - Menú{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>3 Rondas para jugar</h2>
+    
+    <div class="main-menu post-game">
+        <a href="{{ url_for('help_page') }}" class="btn btn-info">Ayuda</a>
+        <a href="{{ url_for('setup') }}" class="btn btn-primary">Jugar</a>
+        <a href="{{ url_for('ranking') }}" class="btn btn-secondary">Ranking</a>
+        <a href="javascript:window.close();" class="btn btn-danger">Salir</a>
+    </div>
+      <div class="game-info">
+        <p>El juego "Just Eleven" consiste en parar un reloj lo más cerca posible a 11 segundos sin pasarse.</p>
+        <p>Cada jugador tiene 3 rondas y gana el que más cerca quede de 11 segundos.</p>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block title %}Just Eleven - Jugando{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Ronda {{ game_state.current_round }} de {{ game_state.rounds }}</h2>
+    
+    <div class="player-turn">
+        <h3>Turno de: {{ current_player }}</h3>
+    </div>    <div class="game-board">        {% if game_state.timer_result is not none %}
+        <div class="timer-result {% if game_state.timer_result > game_state.target_time %}over-time{% endif %}">
+            <h3>¡Has detenido el reloj en {{ "%.2f"|format(game_state.timer_result) }} segundos!</h3>
+            {% if game_state.timer_result <= game_state.target_time %}
+            <p>¡Bien hecho! Te has acercado al tiempo objetivo sin pasarte.</p>
+            {% else %}
+            <p>Te has pasado del tiempo objetivo. Tu puntuación ha sido penalizada.</p>
+            {% endif %}
+        </div>
+        {% endif %}
+        
+        <div class="scores">
+            <h4>Puntuaciones actuales:</h4>
+            <ul>
+                {% for i in range(game_state.players|length) %}
+                <li>{{ game_state.players[i] }}: {{ "%.2f"|format(game_state.scores[i]) if game_state.scores[i] else "0.00" }} puntos</li>
+                {% endfor %}
+            </ul>
+        </div>
+        
+        <div class="timer-container">
+            <div id="timer">00:00:00</div>
+            <div class="target-time">Objetivo: {{ "%.1f"|format(game_state.target_time) }} segundos</div>
+        </div>
+        
+        <form action="{{ url_for('play') }}" method="post" class="play-form">
+            {% if game_state.timer_start is none %}
+            <input type="hidden" name="action" value="start">
+            <button type="submit" class="btn btn-success btn-lg">Iniciar Temporizador</button>
+            {% else %}
+            <input type="hidden" name="action" value="stop">
+            <button type="submit" class="btn btn-danger btn-lg">Detener Temporizador</button>
+            {% endif %}
+        </form>    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Función para actualizar el temporizador
+    let startTime;
+    let timerInterval;
+    const timerElement = document.getElementById('timer');
+    
+    function startTimer() {
+        startTime = new Date().getTime();
+        
+        // Actualizar el timer cada 10ms para ser más preciso
+        timerInterval = setInterval(updateTimer, 10);
+        
+        // Agregar clase 'active' al timer para efectos visuales
+        timerElement.classList.add('active');
+    }
+      function updateTimer() {
+        const now = new Date().getTime();
+        const elapsed = now - startTime;
+        
+        const minutes = Math.floor((elapsed % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((elapsed % (1000 * 60)) / 1000);
+        const milliseconds = Math.floor((elapsed % 1000) / 10);
+        
+        timerElement.textContent = 
+            (minutes < 10 ? '0' : '') + minutes + ':' +
+            (seconds < 10 ? '0' : '') + seconds + ':' +
+            (milliseconds < 10 ? '0' : '') + milliseconds;
+        
+        // Obtener el tiempo objetivo
+        const targetTime = {{ game_state.target_time|default(11) }};
+        
+        // Cambiar color según se acerca al tiempo objetivo
+        if (seconds === Math.floor(targetTime) && (seconds + milliseconds/100) < targetTime + 0.5) {
+            timerElement.style.backgroundColor = '#27ae60'; // Verde cuando está cerca del objetivo
+        } else if ((seconds + milliseconds/100) > targetTime + 0.5) {
+            timerElement.style.backgroundColor = '#c0392b'; // Rojo cuando se pasa del objetivo
+        } else if (seconds === Math.floor(targetTime) - 1 && milliseconds > 50) {
+            timerElement.style.backgroundColor = '#f39c12'; // Amarillo cuando se acerca al objetivo
+        }
+    }
+    
+    // Iniciar el temporizador si ya está en marcha
+    {% if game_state.timer_start is not none %}
+    document.addEventListener('DOMContentLoaded', function() {
+        startTimer();
+    });
+    {% endif %}
+</script>
+{% endblock %}
