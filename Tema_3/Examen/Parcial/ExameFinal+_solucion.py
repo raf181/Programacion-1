@@ -1,5 +1,114 @@
 import random
 
+# Definición de los platos disponibles
+platos = {
+    "Ensalada César": {
+        "precio": 6.5,
+        "alergenos": ["huevo", "lácteos", "gluten"],
+        "tipo": "primero"
+    },
+    "Gazpacho andaluz": {
+        "precio": 5.0,
+        "alergenos": [],
+        "tipo": "primero"
+    },
+    "Crema de calabacín": {
+        "precio": 5.5,
+        "alergenos": ["lácteos"],
+        "tipo": "primero"
+    },
+    "Arroz con verduras": {
+        "precio": 7.0,
+        "alergenos": [],
+        "tipo": "primero"
+    },
+    "Huevos rellenos": {
+        "precio": 6.0,
+        "alergenos": ["huevo", "lácteos"],
+        "tipo": "primero"
+    },
+    "Ensalada de pasta": {
+        "precio": 6.8,
+        "alergenos": ["gluten"],
+        "tipo": "primero"
+    },
+    "Entrecot de ternera": {
+        "precio": 12.5,
+        "alergenos": [],
+        "tipo": "segundo"
+    },
+    "Salmón al horno": {
+        "precio": 11.0,
+        "alergenos": ["pescado"],
+        "tipo": "segundo"
+    },
+    "Pollo al curry": {
+        "precio": 9.5,
+        "alergenos": ["lácteos"],
+        "tipo": "segundo"
+    },
+    "Lentejas estofadas": {
+        "precio": 8.0,
+        "alergenos": [],
+        "tipo": "segundo"
+    },
+    "Bacalao con tomate": {
+        "precio": 10.5,
+        "alergenos": ["pescado"],
+        "tipo": "segundo"
+    },
+    "Filete de merluza": {
+        "precio": 9.8,
+        "alergenos": ["pescado", "gluten"],
+        "tipo": "segundo"
+    },
+    "Tortilla española": {
+        "precio": 7.0,
+        "alergenos": ["huevo"],
+        "tipo": "ambos"
+    },
+    "Croquetas de jamón": {
+        "precio": 6.5,
+        "alergenos": ["gluten", "lácteos"],
+        "tipo": "ambos"
+    },
+    "Pasta boloñesa": {
+        "precio": 8.0,
+        "alergenos": ["gluten"],
+        "tipo": "ambos"
+    },
+    "Risotto de setas": {
+        "precio": 9.0,
+        "alergenos": ["lácteos"],
+        "tipo": "ambos"
+    },
+    "Flan de huevo": {
+        "precio": 3.5,
+        "alergenos": ["huevo", "lácteos"],
+        "tipo": "postre"
+    },
+    "Tarta de queso": {
+        "precio": 4.0,
+        "alergenos": ["gluten", "lácteos", "huevo"],
+        "tipo": "postre"
+    },
+    "Fruta del tiempo": {
+        "precio": 2.5,
+        "alergenos": [],
+        "tipo": "postre"
+    },
+    "Helado de vainilla": {
+        "precio": 3.0,
+        "alergenos": ["lácteos"],
+        "tipo": "postre"
+    },
+    "Arroz con leche": {
+        "precio": 3.2,
+        "alergenos": ["lácteos"],
+        "tipo": "postre"
+    }
+}
+
 class Menu:
     def __init__(self, primero, segundo, postre, precio):
         self.id = random.randint(1, 1000)
@@ -190,20 +299,28 @@ if __name__ == "__main__":
     camarero2 = Camarero("María López", generador)
     
     # Proponer menús y tomar pedidos
+    print("Generando menú 1 (sin lácteos)...")
     menu1 = camarero1.ProponerMenu("lácteos")
-    camarero1.TomarPedido(menu1)
+    print(f"Menú 1: Primero={menu1.primero}, Segundo={menu1.segundo}, Postre={menu1.postre}, Precio original={menu1.precio}€, Precio con descuento={menu1.GetPrecio()}€")
+    pedido1 = camarero1.TomarPedido(menu1)
+    print(f"Pedido registrado con ID: {pedido1['id']}")
     
+    print("\nGenerando menú 2 (sin huevo)...")
     menu2 = camarero2.ProponerMenu("huevo")
-    camarero2.TomarPedido(menu2)
+    print(f"Menú 2: Primero={menu2.primero}, Segundo={menu2.segundo}, Postre={menu2.postre}, Precio original={menu2.precio}€, Precio con descuento={menu2.GetPrecio()}€")
+    pedido2 = camarero2.TomarPedido(menu2)
+    print(f"Pedido registrado con ID: {pedido2['id']}")
     
     # Cobrar pedidos
+    print("\nCobrando el pedido 1...")
     camarero1.CobrarPedido(1)
+    print("Pedido 1 cobrado.")
     
     # Crear un turno
     turno = Turno([camarero1, camarero2], "2025-05-16", "14:00", "22:00")
     
     # Mostrar ventas
-    print("Ventas totales del turno:")
+    print("\nVentas totales del turno:")
     turno.MostrarVentas()
     
     print("\nVentas por camarero:")

@@ -1,8 +1,3 @@
-# Estas desarrollando un prototipo de software que permita a la cadena de restaurantes FastMenu ser mas 
-# eficientes en su gestion. Para ello, pondras al servicio de los camareros un generador de menus que les 
-# permita, obtener un menu con los platos disponibles, teniendo en cuenta posibles alergias. 
-# Para ello deberas implementar en Python las siguientes clases: 
-
 
 
 # --- imports --- #
@@ -116,6 +111,11 @@ platos = {
     }
 }
 
+# Estas desarrollando un prototipo de software que permita a la cadena de restaurantes FastMenu ser mas 
+# eficientes en su gestion. Para ello, pondras al servicio de los camareros un generador de menus que les 
+# permita, obtener un menu con los platos disponibles, teniendo en cuenta posibles alergias. 
+# Para ello deberas implementar en Python las siguientes clases: 
+
 # 1. (0,5 puntos) Crear la clase Menu: 
 #   - Atributos: id, primero, segundo, postre, precio
 #   - Métodos:
@@ -159,7 +159,7 @@ class MenuGenerator:
 #       pasado como parametro.
     def GetPlatos(self, tipo, alergeno):
         platos_filtrados = []
-        
+    
         # Verificamos si el plato es del tipo que se le da y sin los alergenos
         for nombre, info in self.platos.items():
             es_tipo_valido = info["tipo"] == tipo or info["tipo"] == "ambos"
@@ -255,7 +255,7 @@ class Camarero:
     def CobrarPedido(self, id_pedido):
         for pedido in self.ventas:
             if pedido["id"] == id_pedido:
-                pedido["cobrado"] = False
+                pedido["cobrado"] = True
                 return
         raise Exception(f"El pedido {id_pedido} no esta en la lista de ventas")
 
@@ -286,11 +286,11 @@ class Turno:
 #         los menus cobrados por ese camarero. Si no recibe id de camarero, mostrara por pantalla el total 
 #         de los menus cobrados por cada uno de los camareros del turno.
     def MostrarVentasPorCamarero(self, id_camarero=None):
-        total_ventas = 0
         if id_camarero:
             # Mostrar ventas de un camarero específico
             for camarero in self.lista_camareros:
                 if camarero.id == id_camarero:
+                    total_ventas = 0
                     for pedido in camarero.ventas:
                         if pedido["cobrado"]:
                             total_ventas += pedido["menu"].GetPrecio()
@@ -301,6 +301,7 @@ class Turno:
         
         else: # Mostrar ventas de todos los camareros si no se le da id_camarero
             for camarero in self.lista_camareros:
+                total_ventas = 0
                 for pedido in camarero.ventas:
                     if pedido["cobrado"]:
                         total_ventas += pedido["menu"].GetPrecio()
@@ -314,19 +315,23 @@ if __name__ == "__main__":
     camarero1 = Camarero("Juan Pérez", generador)
     camarero2 = Camarero("María López", generador)
     
+    # Proponer menús y tomar pedidos
+    print("Generando menú 1 (sin lácteos)...")
     menu1 = camarero1.ProponerMenu("lácteos")
-    print(menu1)
-    camarero1.TomarPedido(menu1)
+    print(f"Menú 1: Primero={menu1.primero}, Segundo={menu1.segundo}, Postre={menu1.postre}, Precio original={menu1.precio}€, Precio con descuento={menu1.GetPrecio()}€")
+    pedido1 = camarero1.TomarPedido(menu1)
+    print(f"Pedido registrado con ID: {pedido1['id']}")
     
+    print("\nGenerando menú 2 (sin huevo)...")
     menu2 = camarero2.ProponerMenu("huevo")
-    print(menu1)
-    camarero2.TomarPedido(menu2)
-
+    pedido2 = camarero2.TomarPedido(menu2)
+    print(f"Pedido registrado con ID: {pedido2['id']}")
+    
     camarero1.CobrarPedido(1)
     
     turno = Turno([camarero1, camarero2], "2025-05-16", "14:00", "22:00")
     
-    print("Ventas totales del turno:")
+    print("\nVentas totales del turno:")
     turno.MostrarVentas()
     
     print("\nVentas por camarero:")
